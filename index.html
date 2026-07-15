@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Darling! ✨</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Twinkling Starry Background Canvas -->
+    <canvas id="stars-canvas"></canvas>
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Floating Background Particles Container -->
+    <div id="ambient-particles"></div>
+
+    <!-- Music Player Toggle -->
+    <button class="music-toggle" id="musicToggleBtn" aria-label="Toggle Music">
+        <svg class="music-icon play" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="currentColor"
+                d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6zm-2 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" />
+        </svg>
+        <span class="music-waves">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </button>
+
+    <!-- App Container -->
+    <main class="app-container">
+
+        <!-- ================= PAGE 1: DEDICATION ================= -->
+        <section id="page-dedication" class="page-section active">
+            <div class="content-wrapper glass-card">
+                <h1 class="celebration-title animated-gradient-text">Happy Birthday, Darling!</h1>
+                <p class="subtitle">For the one who fills my world with love and brightness.</p>
+
+                <div class="envelope-container">
+                    <div class="envelope-wrapper" id="envelope">
+                        <div class="envelope">
+                            <div class="flap"></div>
+                            <div class="pocket"></div>
+                            <div class="letter" id="letter">
+                                <div class="letter-text">
+                                    <span class="letter-salutation">My Dearest,</span>
+                                    <p class="letter-body">
+                                        On this incredibly special day, I want to remind you of how much you mean to me.
+                                        You bring so much joy, warmth, and laughter into my life, and every single
+                                        moment with you is a treasure.
+                                    </p>
+                                    <p class="letter-body">
+                                        May your year ahead be as beautiful, bright, and wonderful as your smile. I hope
+                                        today brings you as much happiness as you bring to everyone around you.
+                                    </p>
+                                    <p class="letter-body">
+                                        Happy Birthday. I love you, always. ❤️
+                                    </p>
+                                    <span class="letter-signature">Yours, Always</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="envelope-heart-seal" id="seal">
+                            <svg viewBox="0 0 32 32" width="40" height="40">
+                                <path fill="#ff4d6d"
+                                    d="M16 28.5L4.3 16.8c-2.9-2.9-2.9-7.6 0-10.5 2.9-2.9 7.6-2.9 10.5 0l1.2 1.2 1.2-1.2c2.9-2.9 7.6-2.9 10.5 0 2.9 2.9 2.9 7.6 0 10.5L16 28.5z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="instruction-text blink-anim">Tap the heart seal to open your letter ✨</p>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 2: CAKE ================= -->
+        <section id="page-cake" class="page-section">
+            <div class="content-wrapper glass-card">
+                <h2 class="section-title animated-gradient-text">Make a Wish! 🎂</h2>
+                <p class="subtitle">A magical cake just for you. Blow out the candles by tapping them!</p>
+
+                <div class="cake-container">
+                    <!-- SVG Interactive Cake -->
+                    <svg id="birthday-cake" viewBox="0 0 300 350" width="300" height="350">
+                        <defs>
+                            <!-- Cake shadow and glows -->
+                            <radialGradient id="cake-glow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#ffe3e8" stop-opacity="0.8" />
+                                <stop offset="100%" stop-color="#ffe3e8" stop-opacity="0" />
+                            </radialGradient>
+                            <linearGradient id="frosting-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ff758f" />
+                                <stop offset="50%" stop-color="#ff8fa3" />
+                                <stop offset="100%" stop-color="#ff758f" />
+                            </linearGradient>
+                            <linearGradient id="cream-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#fff0f3" />
+                                <stop offset="50%" stop-color="#ffffff" />
+                                <stop offset="100%" stop-color="#fff0f3" />
+                            </linearGradient>
+                            <linearGradient id="flame-grad" x1="0%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" stop-color="#ff3f34" stop-opacity="0.8" />
+                                <stop offset="40%" stop-color="#ffa502" />
+                                <stop offset="85%" stop-color="#ffdd59" />
+                                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.9" />
+                            </linearGradient>
+                            <filter id="glow-effect" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="6" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+
+                        <!-- Stand/Pedestal -->
+                        <ellipse cx="150" cy="290" rx="110" ry="20" fill="#e2e8f0" opacity="0.3" />
+                        <path d="M100 290 L120 320 L180 320 L200 290 Z" fill="#cbd5e1" opacity="0.6" />
+                        <ellipse cx="150" cy="290" rx="100" ry="12" fill="#f8fafc" opacity="0.9" />
+
+                        <!-- Cake Base Layer (Vanilla/Strawberry Biscuit) -->
+                        <path d="M60 210 L60 280 Q150 300 240 280 L240 210 Z" fill="url(#frosting-grad)" />
+                        <ellipse cx="150" cy="210" rx="90" ry="15" fill="#ffb3c1" />
+
+                        <!-- Middle Cream layer -->
+                        <path d="M60 235 L60 250 Q150 270 240 250 L240 235 Z" fill="url(#cream-grad)" />
+
+                        <!-- Drips on cake base -->
+                        <path
+                            d="M60 210 Q65 225 70 225 Q75 225 80 210 Q85 235 90 235 Q95 235 100 210 Q105 230 112 230 Q118 230 125 210 Q135 240 145 240 Q155 240 165 210 Q175 235 185 235 Q195 235 205 210 Q215 228 222 228 Q228 228 240 210 L240 210 L60 210 Z"
+                            fill="url(#cream-grad)" />
+
+                        <!-- Cake Top Layer (Chocolate/Strawberry frosting mix) -->
+                        <path d="M75 140 L75 210 Q150 222 225 210 L225 140 Z" fill="#ff4d6d" />
+                        <ellipse cx="150" cy="140" rx="75" ry="12" fill="#ff758f" />
+
+                        <!-- Top layer frosting drips -->
+                        <path
+                            d="M75 140 Q80 152 85 152 Q90 152 95 140 Q100 158 108 158 Q115 158 122 140 Q130 155 138 155 Q145 155 152 140 Q160 160 168 160 Q175 160 182 140 Q190 152 198 152 Q205 152 212 140 Q218 155 225 140 L225 140 L75 140 Z"
+                            fill="#ffe3e8" />
+
+                        <!-- Sprinkles & Cherries -->
+                        <!-- Sprinkles -->
+                        <rect x="100" y="142" width="6" height="3" rx="1.5" fill="#fbc531"
+                            transform="rotate(15 100 142)" />
+                        <rect x="130" y="145" width="6" height="3" rx="1.5" fill="#4cd137"
+                            transform="rotate(-30 130 145)" />
+                        <rect x="170" y="141" width="6" height="3" rx="1.5" fill="#00a8ff"
+                            transform="rotate(45 170 141)" />
+                        <rect x="195" y="144" width="6" height="3" rx="1.5" fill="#e84118"
+                            transform="rotate(-15 195 144)" />
+
+                        <rect x="90" y="215" width="8" height="3.5" rx="1.7" fill="#4cd137"
+                            transform="rotate(25 90 215)" />
+                        <rect x="120" y="222" width="8" height="3.5" rx="1.7" fill="#fbc531"
+                            transform="rotate(-10 120 222)" />
+                        <rect x="150" y="226" width="8" height="3.5" rx="1.7" fill="#00a8ff"
+                            transform="rotate(60 150 226)" />
+                        <rect x="185" y="221" width="8" height="3.5" rx="1.7" fill="#e84118"
+                            transform="rotate(-45 185 221)" />
+                        <rect x="210" y="216" width="8" height="3.5" rx="1.7" fill="#9c27b0"
+                            transform="rotate(15 210 216)" />
+
+                        <!-- Cherries on Top -->
+                        <circle cx="110" cy="140" r="7" fill="#d00000" />
+                        <path d="M110 133 Q115 120 122 122" stroke="#4a5759" stroke-width="1.5" fill="none" />
+
+                        <circle cx="190" cy="140" r="7" fill="#d00000" />
+                        <path d="M190 133 Q195 120 202 122" stroke="#4a5759" stroke-width="1.5" fill="none" />
+
+                        <!-- CANDLE 1 (Left) -->
+                        <g class="candle-group" id="candle-1">
+                            <rect x="107" y="90" width="6" height="40" fill="#a29bfe" rx="2" />
+                            <!-- Stripes -->
+                            <path d="M107 120 L113 115 M107 110 L113 105 M107 100 L113 95" stroke="#ffffff"
+                                stroke-width="2.5" />
+                            <!-- Wick -->
+                            <line x1="110" y1="90" x2="110" y2="84" stroke="#2d3436" stroke-width="1.5" />
+                            <!-- Flame -->
+                            <path class="flame-element flickering"
+                                d="M110 84 C106 80 106 72 110 64 C114 72 114 80 110 84 Z" fill="url(#flame-grad)"
+                                filter="url(#glow-effect)" />
+                            <!-- Smoke (Hidden initially) -->
+                            <path class="smoke-puff" d="M110 80 Q105 70 115 60 T110 40" stroke="#f1f2f6"
+                                stroke-dasharray="100" stroke-dashoffset="100" stroke-width="3" stroke-linecap="round"
+                                fill="none" opacity="0" />
+                        </g>
+
+                        <!-- CANDLE 2 (Center - Main) -->
+                        <g class="candle-group" id="candle-2">
+                            <rect x="147" y="80" width="7" height="50" fill="#74b9ff" rx="2" />
+                            <!-- Stripes -->
+                            <path d="M147 120 L154 113 M147 105 L154 98 M147 90 L154 83" stroke="#ffffff"
+                                stroke-width="2.5" />
+                            <!-- Wick -->
+                            <line x1="150.5" y1="80" x2="150.5" y2="73" stroke="#2d3436" stroke-width="1.5" />
+                            <!-- Flame -->
+                            <path class="flame-element flickering"
+                                d="M150.5 73 C145.5 68 145.5 58 150.5 48 C155.5 58 155.5 68 150.5 73 Z"
+                                fill="url(#flame-grad)" filter="url(#glow-effect)" />
+                            <!-- Smoke -->
+                            <path class="smoke-puff" d="M150.5 70 Q145.5 58 155.5 48 T150.5 28" stroke="#f1f2f6"
+                                stroke-dasharray="100" stroke-dashoffset="100" stroke-width="3" stroke-linecap="round"
+                                fill="none" opacity="0" />
+                        </g>
+
+                        <!-- CANDLE 3 (Right) -->
+                        <g class="candle-group" id="candle-3">
+                            <rect x="187" y="90" width="6" height="40" fill="#55efc4" rx="2" />
+                            <!-- Stripes -->
+                            <path d="M187 120 L193 115 M187 110 L193 105 M187 100 L193 95" stroke="#ffffff"
+                                stroke-width="2.5" />
+                            <!-- Wick -->
+                            <line x1="190" y1="90" x2="190" y2="84" stroke="#2d3436" stroke-width="1.5" />
+                            <!-- Flame -->
+                            <path class="flame-element flickering"
+                                d="M190 84 C186 80 186 72 190 64 C194 72 194 80 190 84 Z" fill="url(#flame-grad)"
+                                filter="url(#glow-effect)" />
+                            <!-- Smoke -->
+                            <path class="smoke-puff" d="M190 80 Q185 70 195 60 T190 40" stroke="#f1f2f6"
+                                stroke-dasharray="100" stroke-dashoffset="100" stroke-width="3" stroke-linecap="round"
+                                fill="none" opacity="0" />
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="wish-hint-box">
+                    <p class="instruction-text text-glow" id="cake-instruction">Tapping the flames will blow them out! ✨
+                    </p>
+                </div>
+            </div>
+
+            <!-- Make a Wish Modal Overlay -->
+            <div class="wish-overlay" id="wishModal">
+                <div class="wish-modal glass-card">
+                    <div class="modal-stars">✨ 💖 ✨</div>
+                    <h3>Make Your Wish</h3>
+                    <p>Close your eyes, make a silent wish, and write it in the stars...</p>
+                    <textarea id="wishInput" placeholder="I wish for..." rows="3"></textarea>
+                    <button class="action-btn" id="sendWishBtn">Send Into The Universe ✨</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: CARTOON & GIFT ================= -->
+        <section id="page-cartoon" class="page-section">
+            <div class="content-wrapper glass-card">
+                <h2 class="section-title animated-gradient-text">A Special Delivery! 🎁</h2>
+                <p class="subtitle">Meet your little birthday buddy and open your surprise!</p>
+
+                <div class="cartoon-gallery-split">
+                    <!-- Column 1: Cartoon Bear -->
+                    <div class="bear-column">
+                        <div class="speech-bubble-container">
+                            <div class="speech-bubble" id="bearSpeech">Hi darling! Tap me for a giant virtual hug! 🧸
+                            </div>
+                        </div>
+
+                        <div class="bear-container" id="bearCharacter">
+                            <!-- SVG Bear Character -->
+                            <svg viewBox="0 0 200 200" width="180" height="180" class="cute-bear">
+                                <!-- Shadow -->
+                                <ellipse cx="100" cy="180" rx="55" ry="10" fill="#000000" opacity="0.15" />
+
+                                <!-- Body -->
+                                <ellipse cx="100" cy="135" rx="45" ry="38" fill="#dfb48c" />
+                                <!-- White Tummy Patch -->
+                                <ellipse cx="100" cy="140" rx="28" ry="22" fill="#fff5eb" />
+
+                                <!-- Left Ear -->
+                                <circle cx="60" cy="65" r="20" fill="#dfb48c" />
+                                <circle cx="60" cy="65" r="12" fill="#f3cbb3" />
+
+                                <!-- Right Ear -->
+                                <circle cx="140" cy="65" r="20" fill="#dfb48c" />
+                                <circle cx="140" cy="65" r="12" fill="#f3cbb3" />
+
+                                <!-- Head -->
+                                <circle cx="100" cy="95" r="45" fill="#dfb48c" />
+
+                                <!-- Blushing Cheeks -->
+                                <circle cx="68" cy="108" r="7" fill="#ff8fa3" opacity="0.6" />
+                                <circle cx="132" cy="108" r="7" fill="#ff8fa3" opacity="0.6" />
+
+                                <!-- Snout -->
+                                <ellipse cx="100" cy="108" rx="14" ry="10" fill="#fff5eb" />
+                                <path d="M96 105 Q100 109 104 105" stroke="#4a3728" stroke-width="2" fill="none" />
+                                <path d="M100 108 L100 112" stroke="#4a3728" stroke-width="2" />
+                                <polygon points="98,102 102,102 100,105" fill="#4a3728" />
+
+                                <!-- Eyes -->
+                                <g class="bear-eyes">
+                                    <circle cx="78" cy="95" r="4.5" fill="#4a3728" class="bear-eye-left" />
+                                    <circle cx="122" cy="95" r="4.5" fill="#4a3728" class="bear-eye-right" />
+                                    <!-- Eye sparkles -->
+                                    <circle cx="76.5" cy="93.5" r="1.5" fill="#ffffff" />
+                                    <circle cx="120.5" cy="93.5" r="1.5" fill="#ffffff" />
+                                </g>
+
+                                <!-- Left Arm (Waving) -->
+                                <g class="bear-left-arm">
+                                    <ellipse cx="50" cy="130" rx="12" ry="18" fill="#dfb48c"
+                                        transform="rotate(30 50 130)" />
+                                </g>
+
+                                <!-- Right Arm (Holding Heart) -->
+                                <g class="bear-right-arm">
+                                    <ellipse cx="150" cy="130" rx="12" ry="18" fill="#dfb48c"
+                                        transform="rotate(-30 150 130)" />
+                                </g>
+
+                                <!-- Little feet -->
+                                <circle cx="75" cy="170" r="14" fill="#dfb48c" />
+                                <circle cx="75" cy="170" r="9" fill="#f3cbb3" />
+                                <circle cx="125" cy="170" r="14" fill="#dfb48c" />
+                                <circle cx="125" cy="170" r="9" fill="#f3cbb3" />
+
+                                <!-- Small Heart on Chest -->
+                                <path
+                                    d="M100 148 C97 143 91 143 89 146 C87 149 89 154 100 160 C111 154 113 149 111 146 C109 143 103 143 100 148 Z"
+                                    fill="#ff4d6d" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Gift Box / Photos -->
+                    <div class="gift-column">
+                        <div class="gift-box-wrapper" id="giftBox">
+                            <div class="gift-lid">
+                                <svg viewBox="0 0 100 40" width="100" height="40">
+                                    <!-- Lid Lid -->
+                                    <rect x="5" y="15" width="90" height="20" rx="4" fill="#ff4d6d" />
+                                    <!-- Ribbon Bow -->
+                                    <path d="M50 15 C40 0 35 15 50 15 C65 15 60 0 50 15 Z" fill="#ffd166" />
+                                    <circle cx="50" cy="15" r="6" fill="#ffd166" />
+                                    <rect x="44" y="15" width="12" height="20" fill="#ffd166" />
+                                </svg>
+                            </div>
+                            <div class="gift-body">
+                                <svg viewBox="0 0 100 90" width="100" height="90">
+                                    <rect x="10" y="0" width="80" height="80" rx="5" fill="#ff758f" />
+                                    <!-- Ribbons -->
+                                    <rect x="44" y="0" width="12" height="80" fill="#ffd166" />
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="instruction-text text-glow">Tap the box to unwrap your memories! 🎁</p>
+                    </div>
+                </div>
+
+                <!-- Memories Polaroid Slide-up Container (Hidden initially) -->
+                <div class="polaroid-slider-wrapper" id="memoriesSlider">
+                    <div class="polaroids-container">
+                        <!-- Polaroid 1 (photo inserted) -->
+                        <div class="polaroid-card">
+                            <div class="polaroid-img-placeholder">
+                                <img src="pic/05.09.2022.jpg" alt="Memory 05.09.2022" class="polaroid-photo">
+                            </div>
+                            <div class="polaroid-caption">05.09.2022</div>
+                        </div>
+
+                        <!-- Polaroid 2 -->
+                        <div class="polaroid-card">
+                            <div class="polaroid-img-placeholder">
+                                <img src="pic/26.07.2023.jpg" alt="Memory 26.07.2023" class="polaroid-photo">
+                            </div>
+                            <div class="polaroid-caption">26.07.2023</div>
+                        </div>
+
+                        <!-- Polaroid 3 -->
+                        <div class="polaroid-card">
+                            <div class="polaroid-img-placeholder">
+                                <img src="pic/05.07.2025.jpg" alt="Memory 05.07.2025" class="polaroid-photo">
+                            </div>
+                            <div class="polaroid-caption">05.07.2025</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation Dock -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" data-page="page-dedication">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            <span class="nav-label">Dedication</span>
+        </button>
+        <button class="nav-item" data-page="page-cake">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="M12 6a2 2 0 0 0 2-2c0-.38-.1-.73-.29-1.03L12 0l-1.71 2.97c-.19.3-.29.65-.29 1.03a2 2 0 0 0 2 2zm7 3h-5V7h-4v2H5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2zm0 13H5v-4h14v4zm0-6H5v-5h14v5z" />
+            </svg>
+            <span class="nav-label">Cake</span>
+        </button>
+        <button class="nav-item" data-page="page-cartoon">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="M20 6h-2.18c.11-.31.18-.65.18-1a2.5 2.5 0 0 0-5-0.5L12 6l-1-1.5A2.5 2.5 0 0 0 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6-1c0-.28.22-.5.5-.5s.5.22.5.5-.22.5-.5.5h-.5V5zm-6 0c0-.28.22-.5.5-.5s.5.22.5.5v.5h-.5c-.28 0-.5-.22-.5-.5zm12 14H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4 15.38 12 17 10.83 14.92 8H20v6z" />
+            </svg>
+            <span class="nav-label">Buddy & Gift</span>
+        </button>
+    </nav>
+
+    <!-- Custom Web Audio Synthesizer Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
