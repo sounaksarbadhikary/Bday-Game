@@ -61,45 +61,16 @@ let audioCtx = null;
 let musicInterval = null;
 let currentNoteIndex = 0;
 let isMusicPlaying = false;
-let backgroundAudio = new Audio('audio/senorita.mp3');
-backgroundAudio.loop = true;
-backgroundAudio.preload = 'auto';
-let musicUsingFile = false;
+let musicUsingFile = false; // tracks whether we are using an audio file
+let backgroundAudio = document.getElementById('bgAudio');
+if (!backgroundAudio) {
+    console.error('🔊 bgAudio element not found');
+} else {
+    console.log('🔊 bgAudio element loaded, src:', backgroundAudio.src);
+}
+backgroundAudio.volume = 0.5;
 
-// Happy Birthday Sweet Music Box Notes (G major)
-const birthdayMelody = [
-    { freq: 293.66, dur: 0.7 },  // D4
-    { freq: 293.66, dur: 0.3 },  // D4
-    { freq: 329.63, dur: 1.0 },  // E4
-    { freq: 293.66, dur: 1.0 },  // D4
-    { freq: 392.00, dur: 1.0 },  // G4
-    { freq: 369.99, dur: 2.0 },  // F#4
-    
-    { freq: 293.66, dur: 0.7 },  // D4
-    { freq: 293.66, dur: 0.3 },  // D4
-    { freq: 329.63, dur: 1.0 },  // E4
-    { freq: 293.66, dur: 1.0 },  // D4
-    { freq: 440.00, dur: 1.0 },  // A4
-    { freq: 392.00, dur: 2.0 },  // G4
-    
-    { freq: 293.66, dur: 0.7 },  // D4
-    { freq: 293.66, dur: 0.3 },  // D4
-    { freq: 587.33, dur: 1.0 },  // D5
-    { freq: 493.88, dur: 1.0 },  // B4
-    { freq: 392.00, dur: 1.0 },  // G4
-    { freq: 369.99, dur: 1.0 },  // F#4
-    { freq: 329.63, dur: 1.0 },  // E4
-    
-    { freq: 523.25, dur: 0.7 },  // C5
-    { freq: 523.25, dur: 0.3 },  // C5
-    { freq: 493.88, dur: 1.0 },  // B4
-    { freq: 392.00, dur: 1.0 },  // G4
-    { freq: 440.00, dur: 1.0 },  // A4
-    { freq: 392.00, dur: 2.5 }   // G4
-];
 
-const noteTempo = 130; // BPM
-const secondsPerBeat = 60 / noteTempo;
 
 function initAudio() {
     if (!audioCtx) {
@@ -165,19 +136,7 @@ function playMusicBoxNote(freq, startTime, duration) {
 }
 
 // Scheduling loop
-function scheduler() {
-    if (!isMusicPlaying) return;
 
-    const currentNote = birthdayMelody[currentNoteIndex];
-    const duration = currentNote.dur * secondsPerBeat;
-
-    playMusicBoxNote(currentNote.freq, audioCtx.currentTime, duration);
-
-    currentNoteIndex = (currentNoteIndex + 1) % birthdayMelody.length;
-    
-    // Schedule next note precisely
-    musicInterval = setTimeout(scheduler, duration * 1000);
-}
 
 async function startMusic() {
     initAudio();
@@ -185,23 +144,22 @@ async function startMusic() {
         await audioCtx.resume();
     }
 
-    // Try to play a user-supplied audio file first (audio/senorita.mp3).
-    // If it fails (file missing or playback blocked), fall back to the synth melody.
+    // Try to play the Senorita audio file
     try {
+        await backgroundAudio.load();
         await backgroundAudio.play();
         musicUsingFile = true;
         isMusicPlaying = true;
         return;
     } catch (err) {
-        // Fallback to synth
+        console.warn('Background audio play failed, no music will play:', err);
+        // No fallback synth; just set playing flag false
         musicUsingFile = false;
-        console.warn('Background audio play failed, falling back to synth:', err);
+        isMusicPlaying = false;
     }
-
-    isMusicPlaying = true;
-    currentNoteIndex = 0;
-    scheduler();
 }
+
+
 
 function stopMusic() {
     isMusicPlaying = false;
